@@ -15,19 +15,7 @@ public class Server {
             clientSocket = serverSocket.accept();
             out =   new PrintWriter(clientSocket.getOutputStream());
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            Thread sender = new Thread(new Runnable() {
-                String msg;
-                @Override
-                public void run() {
-                    while (true){
-                        msg = sc.nextLine();
-                        out.println(msg);
-                        out.flush();
-                    }
 
-                }
-            });
-            sender.start();
             Thread receive = new Thread(new Runnable() {
                 String msg;
                 @Override
@@ -35,7 +23,7 @@ public class Server {
                     try{
                         msg = in.readLine();
                         while (msg!=null){
-                            System.out.println("Client: "+msg);
+                            System.out.println("ClientIP said: "+msg);
                             msg = in.readLine();
                         }
                         System.out.println("client disconnect");
